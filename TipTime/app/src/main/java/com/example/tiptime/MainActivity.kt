@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.StringRes
+import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -185,8 +186,12 @@ fun RoundTheTipRow(
 
 /**
  * チップの計算を行う
+ *
+ * privateでなくinternalとしてテストからアクセスできるようにする
+ * @VisibleForTestingにより、テスト目的でのみパブリックになっていることが他の開発者に示される
  */
-private fun calculateTip(
+@VisibleForTesting
+internal fun calculateTip(
     amount: Double,
     tipPercent: Double = 15.0,
     roundUp: Boolean): String {
