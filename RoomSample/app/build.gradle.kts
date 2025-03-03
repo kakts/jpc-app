@@ -58,11 +58,17 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
 
+    // recyclerViewを使う
+    implementation(libs.androidx.recyclerview)
+
+    implementation("com.google.android.material:material:1.2.1")
+
     // for room
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-common-java8:$rootProject.lifecycleVersion")
     implementation("androidx.constraintlayout:constraintlayout:${rootProject.extra["constraintLayoutVersion"]}")
+    implementation(libs.androidx.recyclerview)
 
 
     testImplementation(libs.junit)
