@@ -14,20 +14,21 @@
  * limitations under the License.
  */
 
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-buildscript {
-    extra.apply {
-        set("room_version", "2.6.0")
+package com.example.inventory.ui.home
+
+import androidx.lifecycle.ViewModel
+import com.example.inventory.data.Item
+
+/**
+ * ViewModel to retrieve all items in the Room database.
+ */
+class HomeViewModel : ViewModel() {
+    companion object {
+        private const val TIMEOUT_MILLIS = 5_000L
     }
 }
 
-plugins {
-    id("com.android.application") version "8.8.0" apply false
-    id("com.android.library") version "8.8.0" apply false
-    id("org.jetbrains.kotlin.android") version "2.1.0" apply false
-    id("org.jetbrains.kotlin.plugin.compose") version "2.1.0" apply false
-}
-
-tasks.register("clean", Delete::class) {
-    delete(rootProject.buildDir)
-}
+/**
+ * Ui State for HomeScreen
+ */
+data class HomeUiState(val itemList: List<Item> = listOf())
