@@ -68,7 +68,9 @@ dependencies {
     // Import the Compose BOM
     implementation(libs.androidx.compose.bom.v20241201)
     implementation(libs.androidx.activity.compose.v193)
-    implementation(libs.material3)
+    implementation(libs.androidx.material3)
+    implementation("androidx.compose.material3:material3:1.2.0")
+
     implementation(libs.ui)
     implementation(libs.ui.tooling)
     implementation(libs.ui.tooling.preview)
@@ -78,6 +80,10 @@ dependencies {
 
     // Room
     implementation(libs.androidx.room.runtime)
+    implementation("androidx.room:room-runtime:${rootProject.extra["room_version"]}")
+    implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.androidx.foundation.android)
+    implementation(libs.androidx.material3.android)
     ksp("androidx.room:room-compiler:${rootProject.extra["room_version"]}")
     implementation(libs.androidx.room.ktx)
 
