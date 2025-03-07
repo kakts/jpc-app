@@ -21,12 +21,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.example.inventory.data.Item
+import com.example.inventory.repository.ItemsRepository
 import java.text.NumberFormat
 
 /**
  * ViewModel to validate and insert items in the Room database.
  */
-class ItemEntryViewModel : ViewModel() {
+class ItemEntryViewModel(private val itemsRepository: ItemsRepository) : ViewModel() {
 
     /**
      * Holds current item ui state
@@ -43,9 +44,21 @@ class ItemEntryViewModel : ViewModel() {
             ItemUiState(itemDetails = itemDetails, isEntryValid = validateInput(itemDetails))
     }
 
+    /**
+     * uiStateのデータが有効かどうかを確認する
+     */
     private fun validateInput(uiState: ItemDetails = itemUiState.itemDetails): Boolean {
         return with(uiState) {
             name.isNotBlank() && price.isNotBlank() && quantity.isNotBlank()
+        }
+    }
+
+    /**
+     * itemをDBに保存する
+     */
+    suspend fun saveItem() {
+        if (validateInput()) {
+            itemsRepository.insertItem(itemUiState.itemDetails.toItem())
         }
     }
 }
@@ -58,6 +71,9 @@ data class ItemUiState(
     val isEntryValid: Boolean = false
 )
 
+/**
+ * 1つのアイテムを表す
+ */
 data class ItemDetails(
     val id: Int = 0,
     val name: String = "",
