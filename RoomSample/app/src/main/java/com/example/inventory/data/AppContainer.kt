@@ -17,6 +17,7 @@
 package com.example.inventory.data
 
 import android.content.Context
+import com.example.inventory.repository.ItemsRepository
 
 /**
  * App container for Dependency injection.
@@ -31,8 +32,9 @@ interface AppContainer {
 class AppDataContainer(private val context: Context) : AppContainer {
     /**
      * Implementation for [ItemsRepository]
+     * lazyを指定することにより、IttemsRepositoryが実際に必要になるまで初期化を遅らせる
      */
     override val itemsRepository: ItemsRepository by lazy {
-        OfflineItemsRepository()
+        OfflineItemsRepository(InventoryDatabase.getDatabase(context).itemDao())
     }
 }
